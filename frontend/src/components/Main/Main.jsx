@@ -21,12 +21,17 @@ export default function Main() {
     api
       .getInitialCards()
       .then((data) => {
-        setCards(data);
+        // Process cards to add isLiked property
+        const cardsWithLikeStatus = data.map((card) => ({
+          ...card,
+          isLiked: card.likes.includes(currentUser._id),
+        }));
+        setCards(cardsWithLikeStatus);
       })
       .catch((err) => {
         console.error('Failed to fetch cards:', err);
       });
-  }, []);
+  }, [currentUser._id]);
 
   // State to manage the currently active popup
   const [popup, setPopup] = useState(null);
@@ -86,7 +91,9 @@ export default function Main() {
       .then((newCard) => {
         setCards((state) =>
           state.map((currentCard) =>
-            currentCard._id === card._id ? newCard : currentCard
+            currentCard._id === card._id
+              ? { ...newCard, isLiked: newCard.likes.includes(currentUser._id) }
+              : currentCard
           )
         );
       })
@@ -110,7 +117,11 @@ export default function Main() {
   async function handleAddCard({ title, imageUrl }) {
     try {
       const newCard = await api.addNewCard(title, imageUrl);
-      setCards((prevCards) => [newCard, ...prevCards]);
+      const cardWithLikeStatus = {
+        ...newCard,
+        isLiked: newCard.likes.includes(currentUser._id),
+      };
+      setCards((prevCards) => [cardWithLikeStatus, ...prevCards]);
       handleClosePopup(); // Close the popup after successful add
     } catch (error) {
       console.error('Failed to add card:', error);
