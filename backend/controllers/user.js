@@ -68,10 +68,14 @@ module.exports.createUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 11000) {
-        return res.status(409).json({ message: "Email already exists" });
+        const error = new Error("Email already exists");
+        error.statusCode = 409;
+        return next(error);
       }
       if (err.name === "ValidationError") {
-        return res.status(400).json({ message: "Invalid user data" });
+        const error = new Error("Invalid user data");
+        error.statusCode = 400;
+        return next(error);
       }
       return next(err);
     });
@@ -85,14 +89,16 @@ module.exports.login = (req, res, next) => {
     .select("+password")
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ message: "Incorrect email or password" });
+        const error = new Error("Incorrect email or password");
+        error.statusCode = 401;
+        throw error;
       }
 
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {
-          return res
-            .status(401)
-            .json({ message: "Incorrect email or password" });
+          const error = new Error("Incorrect email or password");
+          error.statusCode = 401;
+          throw error;
         }
 
         // Create JWT token that expires in 7 days

@@ -1,10 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const { errors } = require("celebrate");
+const { errors, celebrate } = require("celebrate");
+const winston = require("winston");
+const expressWinston = require("express-winston");
 
 const auth = require("./middlewares/auth");
 const { createUser, login } = require("./controllers/user");
+const { signupSchema, signinSchema } = require("./validation/schemas");
 
 const app = express();
 const PORT = 3000;
@@ -19,6 +22,16 @@ app.options("*", cors());
 // Parse JSON requests
 app.use(express.json());
 
+// Request logger
+app.use(
+  expressWinston.logger({
+    transports: [
+      new winston.transports.File({ filename: "request.log" }),
+    ],
+    format: winston.format.json(),
+  })
+);
+
 // Crash test route for testing server recovery with PM2
 app.get("/crash-test", () => {
   setTimeout(() => {
@@ -27,8 +40,8 @@ app.get("/crash-test", () => {
 });
 
 // Public routes (no authentication required)
-app.post("/signin", login);
-app.post("/signup", createUser);
+app.post("/signin", celebrate(signinSchema), login);
+app.post("/signup", celebrate(signupSchema), createUser);
 
 // Apply authentication middleware to all routes below
 app.use(auth);
@@ -45,6 +58,16 @@ app.use("/cards", cardsRouter);
 app.use((req, res) => {
   res.status(404).json({ message: "Requested resource not found" });
 });
+
+// Error logger
+app.use(
+  expressWinston.errorLogger({
+    transports: [
+      new winston.transports.File({ filename: "error.log" }),
+    ],
+    format: winston.format.json(),
+  })
+);
 
 // Celebrate validation error handler
 app.use(errors());
