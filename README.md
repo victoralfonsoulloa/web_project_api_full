@@ -45,9 +45,9 @@ web_project_api_full/
 
 **Part II: Error Handling & Deployment**
 
-- [ ] Centralized error handling
-- [ ] Request validation with celebrate
-- [ ] Request/error logging
+- [x] Centralized error handling
+- [x] Request validation with celebrate
+- [x] Request/error logging
 - [ ] Cloud deployment
 - [ ] Domain setup with HTTPS
 - [ ] PM2 configuration
