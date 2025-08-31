@@ -1,0 +1,170 @@
+.profile {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px 0 50px 0;
+}
+
+.profile__container {
+  display: flex;
+  column-gap: 30px;
+}
+
+.profile__image {
+  position: relative;
+  cursor: pointer;
+  width: 167px;
+  height: 167px;
+}
+
+.profile__image-user {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.profile__image-edit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile__image:hover .profile__image-user {
+  opacity: 0.5;
+}
+
+.profile__image:hover .profile__image-edit {
+  opacity: 1;
+}
+
+.profile__bio-name {
+  display: inline-block;
+  font-family: Inter;
+  font-size: 2.62rem;
+  font-weight: 500;
+  line-height: 1.14;
+  margin: 22px 18px 16px 0;
+  color: white;
+}
+
+.profile__bio-open-popup {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  cursor: pointer;
+}
+
+.profile__bio-open-icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: baseline;
+}
+
+.profile__bio-open-icon:hover {
+  opacity: 60%;
+}
+
+.profile__bio-description {
+  font-family: Inter;
+  font-size: 1.12rem;
+  font-weight: 400;
+  line-height: 1.21;
+  color: white;
+}
+
+.profile__bio-add {
+  border: 2px solid #fff;
+  width: 150px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.profile__bio-add:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.profile__add-icon {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 890px) {
+  .profile__image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile__bio-name {
+    display: inline-block;
+    font-family: Inter;
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 1.14;
+    margin: 22px 18px 10px 0;
+    color: white;
+  }
+
+  .profile__bio-description {
+    font-size: 1rem;
+    line-height: 1.21;
+  }
+
+  .profile__bio-add {
+    width: 115px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 675px) {
+  .profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 0 50px 0;
+  }
+
+  .profile__image {
+    width: 120px;
+    margin: 0 auto;
+  }
+
+  .profile__bio {
+    margin: 0 0 36px 0;
+  }
+
+  .profile__container {
+    flex-direction: column;
+  }
+
+  .profile__bio-name {
+    display: inline-block;
+    font-size: 1.37rem;
+    font-weight: 500;
+    line-height: 1.21;
+    margin: 30px 5px 14px 0;
+    color: white;
+  }
+
+  .profile__bio-open-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .profile__bio-description {
+    font-size: 0.875rem;
+    margin-top: 0;
+    font-weight: 400;
+    line-height: 1.21;
+    text-align: center;
+  }
+}

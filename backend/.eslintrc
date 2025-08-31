@@ -1,0 +1,11 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    // Allow variables that start with an underscore, like _id
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    // Allow the use of console.log
+    "no-console": ["error", { "allow": ["log"] }],
+    // Allow any linebreak style (LF or CRLF)
+    "linebreak-style": 0
+  }
+}
