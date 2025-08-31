@@ -1,48 +1,62 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const { errors } = require("celebrate");
+
+const auth = require("./middlewares/auth");
+const { createUser, login } = require("./controllers/user");
 
 const app = express();
-app.use(express.json());
 const PORT = 3000;
 
-mongoose.connect('mongodb://localhost:27017/aroundb');
+// Connect to MongoDB
+mongoose.connect("mongodb://localhost:27017/aroundb");
 
-// Temporary authorization middleware
-app.use((req, res, next) => {
-  req.user = {
-    _id: '68675e9ed53e5d12399f4edf',
-  };
-  next();
+// Enable CORS
+app.use(cors());
+app.options("*", cors());
+
+// Parse JSON requests
+app.use(express.json());
+
+// Crash test route for testing server recovery with PM2
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("El servidor va a caer");
+  }, 0);
 });
 
-// Import routes
-const usersRouter = require('./routes/users');
-const cardsRouter = require('./routes/cards');
+// Public routes (no authentication required)
+app.post("/signin", login);
+app.post("/signup", createUser);
 
-// Use routes
-app.use('/users', usersRouter);
-app.use('/cards', cardsRouter);
+// Apply authentication middleware to all routes below
+app.use(auth);
+
+// Import protected routes
+const usersRouter = require("./routes/users");
+const cardsRouter = require("./routes/cards");
+
+// Use protected routes
+app.use("/users", usersRouter);
+app.use("/cards", cardsRouter);
 
 // Middleware for non-existent routes
 app.use((req, res) => {
-  res.status(404).json({ message: 'Requested resource not found' });
+  res.status(404).json({ message: "Requested resource not found" });
 });
 
-// Error handler with custom logic
-app.use((err, req, res) => {
-  if (err.name === 'ValidationError') {
-    return res.status(400).json({ message: 'Invalid data' });
-  }
-  if (err.name === 'CastError') {
-    return res.status(400).json({ message: 'Invalid ID format' });
-  }
-  if (err.name === 'DocumentNotFoundError') {
-    return res.status(404).json({ message: 'Resource not found' });
-  }
-  // Default to 500
-  return res
-    .status(500)
-    .json({ message: 'An error has occurred on the server' });
+// Celebrate validation error handler
+app.use(errors());
+
+// Centralized error handler
+app.use((err, req, res, next) => {
+  const { statusCode = 500, message } = err;
+
+  res.status(statusCode).json({
+    message:
+      statusCode === 500 ? "An error has occurred on the server" : message,
+  });
 });
 
 app.listen(PORT, () => {

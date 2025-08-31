@@ -6,6 +6,8 @@
     // Allow the use of console.log
     "no-console": ["error", { "allow": ["log"] }],
     // Allow any linebreak style (LF or CRLF)
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    // Ignore unused 'next' parameter in error handlers
+    "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
   }
 }
