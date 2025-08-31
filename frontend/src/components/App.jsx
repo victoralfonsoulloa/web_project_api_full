@@ -26,7 +26,8 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
-      api.getUserInfo()
+      api
+        .getUserInfo()
         .then((userData) => {
           setCurrentUser(userData);
           setIsLoggedIn(true);
@@ -89,7 +90,7 @@ function App() {
         if (data.token) {
           localStorage.setItem('jwt', data.token);
           setIsLoggedIn(true);
-          
+
           // Get user data using the new token
           return api.getUserInfo();
         }
