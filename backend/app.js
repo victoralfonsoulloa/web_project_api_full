@@ -4,16 +4,17 @@ const cors = require("cors");
 const { errors, celebrate } = require("celebrate");
 const winston = require("winston");
 const expressWinston = require("express-winston");
+require("dotenv").config();
 
 const auth = require("./middlewares/auth");
 const { createUser, login } = require("./controllers/user");
 const { signupSchema, signinSchema } = require("./validation/schemas");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/aroundb");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/aroundb");
 
 // Enable CORS
 app.use(cors());
