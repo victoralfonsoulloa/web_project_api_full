@@ -26,12 +26,9 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
-      Promise.all([api.getUserInfo(), auth.getUserData(token)])
-        .then(([profileData, authUserData]) => {
-          setCurrentUser({
-            ...profileData,
-            ...authUserData.data, // email and _id
-          });
+      api.getUserInfo()
+        .then((userData) => {
+          setCurrentUser(userData);
           setIsLoggedIn(true);
           navigate('/');
         })
@@ -71,11 +68,11 @@ function App() {
       auth
         .register(email, password)
         .then(() => {
-          console.log('user succesfully registered');
+          console.log('user successfully registered');
           setIsSuccessPopupOpen(true);
         })
-        .catch(() => {
-          console.error;
+        .catch((err) => {
+          console.error('Registration failed:', err);
           setIsErrorPopupOpen(true);
         });
     }
@@ -90,27 +87,19 @@ function App() {
       .authorize(email, password)
       .then((data) => {
         if (data.token) {
-          setIsLoggedIn(true);
           localStorage.setItem('jwt', data.token);
-          auth
-            .getUserData(data.token)
-            .then((authUserData) => {
-              api
-                .getUserInfo()
-                .then((profileData) => {
-                  setCurrentUser({
-                    ...profileData,
-                    ...authUserData.data, // merge email and _id from auth
-                  });
-                  navigate('/');
-                })
-                .catch(console.error);
-            })
-            .catch(console.error);
+          setIsLoggedIn(true);
+          
+          // Get user data using the new token
+          return api.getUserInfo();
         }
       })
-      .catch(() => {
-        console.error;
+      .then((userData) => {
+        setCurrentUser(userData);
+        navigate('/');
+      })
+      .catch((err) => {
+        console.error('Login failed:', err);
         setIsErrorPopupOpen(true);
       });
   };

@@ -25,9 +25,7 @@ app.use(express.json());
 // Request logger
 app.use(
   expressWinston.logger({
-    transports: [
-      new winston.transports.File({ filename: "request.log" }),
-    ],
+    transports: [new winston.transports.File({ filename: "request.log" })],
     format: winston.format.json(),
   })
 );
@@ -62,9 +60,7 @@ app.use((req, res) => {
 // Error logger
 app.use(
   expressWinston.errorLogger({
-    transports: [
-      new winston.transports.File({ filename: "error.log" }),
-    ],
+    transports: [new winston.transports.File({ filename: "error.log" })],
     format: winston.format.json(),
   })
 );

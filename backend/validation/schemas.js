@@ -1,12 +1,12 @@
-const { Joi } = require('celebrate');
-const validator = require('validator');
+const { Joi } = require("celebrate");
+const validator = require("validator");
 
 // Custom URL validation function
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) {
     return value;
   }
-  return helpers.error('string.uri');
+  return helpers.error("string.uri");
 };
 
 // User validation schemas

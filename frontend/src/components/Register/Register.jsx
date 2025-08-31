@@ -54,6 +54,7 @@ function Register() {
             id="signup-password"
             autoComplete="new-password"
             required
+            minLength="8"
             onChange={handleChange}
           />
           <span className="signup__input-error signup__input-error_type_password"></span>

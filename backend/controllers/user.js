@@ -91,14 +91,14 @@ module.exports.login = (req, res, next) => {
       if (!user) {
         const error = new Error("Incorrect email or password");
         error.statusCode = 401;
-        throw error;
+        return next(error);
       }
 
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {
           const error = new Error("Incorrect email or password");
           error.statusCode = 401;
-          throw error;
+          return next(error);
         }
 
         // Create JWT token that expires in 7 days

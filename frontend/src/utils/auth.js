@@ -1,4 +1,4 @@
-export const BASE_URL = ' https://se-register-api.en.tripleten-services.com/v1';
+export const BASE_URL = 'http://localhost:3000';
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -9,7 +9,13 @@ export const register = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((errorData) => {
+        throw new Error(errorData.message || `Error: ${res.status}`);
+      });
+    }
   });
 };
 
@@ -22,7 +28,13 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    if (res.ok) {
+      return res.json();
+    } else {
+      return res.json().then((errorData) => {
+        throw new Error(errorData.message || `Error: ${res.status}`);
+      });
+    }
   });
 };
 
@@ -31,8 +43,7 @@ export const getUserData = (token) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
-  })
-    .then(res => res.ok ? res.json() : Promise.reject(res.status));
+  }).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
 };
