@@ -1,9 +1,21 @@
-## Sprint 18 - Full Stack Application
+# Around the US - Social Travel Photo Sharing App
 
-This project consists of two main parts:
+Around the US is a full-stack social media application where users can share and discover beautiful travel photos from around the United States. Users can register accounts, upload photos of their favorite places, and interact with other travelers' content through likes and comments.
 
-1. **Backend**: Node.js API with user authentication and authorization
-2. **Frontend**: React application that connects to the backend API
+## Features
+
+🌎 **Share Your Adventures**: Upload photos of your favorite travel destinations across the US
+👤 **Personal Profiles**: Create and customize your profile with avatar and bio
+❤️ **Social Interaction**: Like and discover photos shared by other travelers
+🔒 **Secure Authentication**: Safe user registration and login system
+📱 **Responsive Design**: Works seamlessly on desktop and mobile devices
+
+## Technology Stack
+
+- **Frontend**: React with modern hooks and responsive design
+- **Backend**: Node.js/Express API with JWT authentication
+- **Database**: MongoDB for storing user profiles and photo data
+- **Deployment**: Cloud server with HTTPS and automatic SSL renewal
 
 ### Project Structure
 
@@ -11,24 +23,47 @@ This project consists of two main parts:
 web_project_api_full/
 ├── backend/        # Node.js API server
 ├── frontend/       # React application
-└── README.md       # This file
+├── deploy.sh       # Automated deployment script
+├── package.json    # Deployment scripts
+└── README.md       # Project documentation
 ```
 
-### Setup Instructions
+## Getting Started
 
-1. **Backend Setup**: Copy your existing backend code into the `backend/` folder
-2. **Frontend Setup**: Copy your existing frontend code into the `frontend/` folder
+### Live Application
+🌐 **Visit**: https://around-the-us.mooo.com
 
-### Next Steps
+### Local Development
 
-- Clone your existing backend repository content into `backend/`
-- Clone your existing frontend repository content into `frontend/`
-- Implement user authentication and authorization
-- Add centralized error handling
-- Configure CORS for frontend-backend communication
-- Deploy to cloud server with domain and HTTPS
+1. **Clone the repository**
+```bash
+git clone https://github.com/victoralfonsoulloa/web_project_api_full.git
+cd web_project_api_full
+```
 
-### Requirements Checklist
+2. **Backend Setup**
+```bash
+cd backend
+npm install
+# Create .env file with your MongoDB URI and JWT secret
+npm start
+```
+
+3. **Frontend Setup**
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### Easy Deployment
+```bash
+npm run deploy
+```
+
+## Sprint 18 Technical Requirements
+
+This project was built as part of TripleTen's Sprint 18, implementing advanced full-stack development concepts including user authentication, error handling, and production deployment.
 
 **Part I: User Authentication & Authorization**
 
@@ -55,19 +90,19 @@ web_project_api_full/
 
 ### Live Application
 
-**Domain**: https://around-the-us.mooo.com  
-**Alternative**: https://www.around-the-us.mooo.com  
-**Server IP**: http://34.53.31.53
-**Status**: ✅ Deployed with HTTPS enabled
+🌐 **Visit the App**: https://around-the-us.mooo.com  
+🔗 **Alternative URL**: https://www.around-the-us.mooo.com  
+🖥️ **Server IP**: http://34.53.31.53  
+✅ **Status**: Live with HTTPS enabled
 
-### Features Working:
+### App Features in Action:
 
-- ✅ User registration and login
-- ✅ Profile editing
-- ✅ Card creation and deletion
-- ✅ Like/unlike functionality
-- ✅ Authentication and authorization
-- ✅ Error handling and logging
+- 📝 **User Registration & Login**: Create your travel profile
+- 🖼️ **Photo Upload**: Share your favorite US travel destinations  
+- 👤 **Profile Management**: Update your avatar and bio
+- ❤️ **Like System**: Show appreciation for other travelers' photos
+- 🗑️ **Content Management**: Edit and delete your own posts
+- 🔐 **Secure Access**: Protected routes and user authentication
 
 ### Testing Endpoints
 
