@@ -143,7 +143,12 @@ function App() {
         {isLoggedIn ? <Footer /> : ''}
 
         {isSuccessPopupOpen && (
-          <Popup onClose={() => setIsSuccessPopupOpen(false)}>
+          <Popup
+            onClose={() => {
+              setIsSuccessPopupOpen(false);
+              navigate('/signin'); // Redirect to login page when user closes success popup
+            }}
+          >
             <InfoTooltip
               image={successImage}
               title="Awesome, you have been successfully registered."
