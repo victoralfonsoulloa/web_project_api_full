@@ -1,0 +1,10 @@
+{
+  "name": "web_project_api_full",
+  "version": "1.0.0",
+  "description": "Sprint 18 - Full Stack Application",
+  "scripts": {
+    "deploy": "chmod +x deploy.sh && ./deploy.sh"
+  },
+  "author": "Victor Ulloa",
+  "license": "ISC"
+}

@@ -55,9 +55,10 @@ web_project_api_full/
 
 ### Live Application
 
-**Domain**: http://around-the-us.mooo.com  
+**Domain**: https://around-the-us.mooo.com  
+**Alternative**: https://www.around-the-us.mooo.com  
 **Server IP**: http://34.53.31.53
-**Status**: ✅ Deployed and functional
+**Status**: ✅ Deployed with HTTPS enabled
 
 ### Features Working:
 

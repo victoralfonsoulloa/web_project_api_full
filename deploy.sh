@@ -63,7 +63,7 @@ EOL
     
     # Build frontend for production
     echo "🏗️ Building frontend..."
-    VITE_API_BASE_URL=http://around-the-us.mooo.com/api npm run build
+    VITE_API_BASE_URL=https://around-the-us.mooo.com/api npm run build
     
     # Install nginx if not already installed
     echo "🌐 Setting up Nginx..."
@@ -101,7 +101,18 @@ EOL
     # Test and reload nginx
     sudo nginx -t && sudo systemctl reload nginx
     
-    echo "✅ Frontend deployed successfully!"
+    # Install Certbot for SSL certificates
+    echo "🔒 Setting up HTTPS with Let's Encrypt..."
+    sudo apt install -y certbot python3-certbot-nginx
+    
+    # Get SSL certificate
+    echo "📜 Obtaining SSL certificate..."
+    sudo certbot --nginx -d around-the-us.mooo.com -d www.around-the-us.mooo.com --non-interactive --agree-tos --email victoralfonsoulloa@gmail.com --redirect
+    
+    # Test SSL renewal
+    sudo certbot renew --dry-run
+    
+    echo "✅ Frontend deployed successfully with HTTPS!"
     
     # Show status
     echo "📊 Deployment Status:"
@@ -109,9 +120,11 @@ EOL
     sudo systemctl status nginx --no-pager -l
     
     echo "🎉 Deployment completed!"
-    echo "🌐 Your app should be accessible at: http://around-the-us.mooo.com"
+    echo "🌐 Your app should be accessible at: https://around-the-us.mooo.com"
+    echo "🔒 HTTPS is now enabled with automatic renewal!"
     
 EOF
 
 echo "✅ Deployment script completed!"
-echo "🌐 Your app should be accessible at: http://around-the-us.mooo.com"
+echo "🌐 Your app should be accessible at: https://around-the-us.mooo.com"
+echo "🔒 HTTPS is now enabled!"
