@@ -63,7 +63,7 @@ EOL
     
     # Build frontend for production
     echo "🏗️ Building frontend..."
-    VITE_API_BASE_URL=http://$SERVER_IP:3000 npm run build
+    VITE_API_BASE_URL=http://around-the-us.mooo.com/api npm run build
     
     # Install nginx if not already installed
     echo "🌐 Setting up Nginx..."
@@ -74,7 +74,7 @@ EOL
     sudo tee /etc/nginx/sites-available/around-the-us << EOL
 server {
     listen 80;
-    server_name $SERVER_IP;
+    server_name around-the-us.mooo.com www.around-the-us.mooo.com;
     
     # Frontend
     location / {
@@ -109,9 +109,9 @@ EOL
     sudo systemctl status nginx --no-pager -l
     
     echo "🎉 Deployment completed!"
-    echo "🌐 Your app should be accessible at: http://$SERVER_IP"
+    echo "🌐 Your app should be accessible at: http://around-the-us.mooo.com"
     
 EOF
 
 echo "✅ Deployment script completed!"
-echo "🌐 Your app should be accessible at: http://$SERVER_IP"
+echo "🌐 Your app should be accessible at: http://around-the-us.mooo.com"

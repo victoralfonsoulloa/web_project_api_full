@@ -48,10 +48,25 @@ web_project_api_full/
 - [x] Centralized error handling
 - [x] Request validation with celebrate
 - [x] Request/error logging
-- [ ] Cloud deployment
-- [ ] Domain setup with HTTPS
-- [ ] PM2 configuration
-- [ ] Environment variables setup
+- [x] Cloud deployment
+- [x] Domain setup with HTTPS
+- [x] PM2 configuration
+- [x] Environment variables setup
+
+### Live Application
+
+**Domain**: http://around-the-us.mooo.com  
+**Server IP**: http://34.53.31.53
+**Status**: ✅ Deployed and functional
+
+### Features Working:
+
+- ✅ User registration and login
+- ✅ Profile editing
+- ✅ Card creation and deletion
+- ✅ Like/unlike functionality
+- ✅ Authentication and authorization
+- ✅ Error handling and logging
 
 ### Testing Endpoints
 
