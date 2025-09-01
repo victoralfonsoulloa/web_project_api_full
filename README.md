@@ -31,17 +31,20 @@ web_project_api_full/
 ## Getting Started
 
 ### Live Application
+
 🌐 **Visit**: https://around-the-us.mooo.com
 
 ### Local Development
 
 1. **Clone the repository**
+
 ```bash
 git clone https://github.com/victoralfonsoulloa/web_project_api_full.git
 cd web_project_api_full
 ```
 
 2. **Backend Setup**
+
 ```bash
 cd backend
 npm install
@@ -50,6 +53,7 @@ npm start
 ```
 
 3. **Frontend Setup**
+
 ```bash
 cd frontend
 npm install
@@ -57,6 +61,7 @@ npm run dev
 ```
 
 ### Easy Deployment
+
 ```bash
 npm run deploy
 ```
@@ -98,7 +103,7 @@ This project was built as part of TripleTen's Sprint 18, implementing advanced f
 ### App Features in Action:
 
 - 📝 **User Registration & Login**: Create your travel profile
-- 🖼️ **Photo Upload**: Share your favorite US travel destinations  
+- 🖼️ **Photo Upload**: Share your favorite US travel destinations
 - 👤 **Profile Management**: Update your avatar and bio
 - ❤️ **Like System**: Show appreciation for other travelers' photos
 - 🗑️ **Content Management**: Edit and delete your own posts

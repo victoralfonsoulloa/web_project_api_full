@@ -5,26 +5,31 @@ The backend API for Around the US, a social travel photo sharing application. Th
 ## Features
 
 🔐 **Authentication & Authorization**
+
 - JWT-based user authentication
 - Secure password hashing with bcrypt
 - Protected routes with middleware authorization
 
 👤 **User Management**
+
 - User registration and login
 - Profile management (name, bio, avatar)
 - Email validation and unique user constraints
 
 🖼️ **Photo/Card Management**
+
 - Upload and share travel photos
 - Delete own photos
 - URL validation for image links
 
 ❤️ **Social Features**
+
 - Like/unlike photos
 - View all user-generated content
 - User ownership validation
 
 🛡️ **Security & Validation**
+
 - Request validation with Celebrate/Joi
 - Centralized error handling
 - Request and error logging
@@ -66,21 +71,24 @@ backend/
 ## Setup & Installation
 
 1. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 2. **Environment Configuration:**
+
    ```bash
    cp .env.example .env
    # Edit .env with your MongoDB URI and JWT secret
    ```
 
 3. **Start the server:**
+
    ```bash
    # Development mode with auto-reload
    npm run dev
-   
+
    # Production mode
    npm start
    ```
@@ -100,34 +108,34 @@ MONGODB_URI=mongodb://localhost:27017/aroundb
 
 ### Public Routes (No Authentication Required)
 
-| Method | Endpoint    | Description           | Body                          |
-|--------|-------------|-----------------------|-------------------------------|
-| POST   | `/signup`   | Register new user     | `{ email, password, name?, about?, avatar? }` |
-| POST   | `/signin`   | Login user            | `{ email, password }`         |
+| Method | Endpoint  | Description       | Body                                          |
+| ------ | --------- | ----------------- | --------------------------------------------- |
+| POST   | `/signup` | Register new user | `{ email, password, name?, about?, avatar? }` |
+| POST   | `/signin` | Login user        | `{ email, password }`                         |
 
 ### Protected Routes (Require Bearer Token)
 
 **User Management:**
-| Method | Endpoint           | Description                    |
+| Method | Endpoint | Description |
 |--------|--------------------|--------------------------------|
-| GET    | `/users/me`        | Get current user profile       |
-| GET    | `/users`           | Get all users                  |
-| PATCH  | `/users/me`        | Update profile (name, about)   |
-| PATCH  | `/users/me/avatar` | Update profile avatar          |
+| GET | `/users/me` | Get current user profile |
+| GET | `/users` | Get all users |
+| PATCH | `/users/me` | Update profile (name, about) |
+| PATCH | `/users/me/avatar` | Update profile avatar |
 
 **Photo/Card Management:**
-| Method | Endpoint                 | Description                    |
+| Method | Endpoint | Description |
 |--------|--------------------------|--------------------------------|
-| GET    | `/cards`                 | Get all photos/cards           |
-| POST   | `/cards`                 | Create new photo/card          |
-| DELETE | `/cards/:cardId`         | Delete own photo/card          |
-| PUT    | `/cards/:cardId/likes`   | Like a photo/card              |
-| DELETE | `/cards/:cardId/likes`   | Remove like from photo/card    |
+| GET | `/cards` | Get all photos/cards |
+| POST | `/cards` | Create new photo/card |
+| DELETE | `/cards/:cardId` | Delete own photo/card |
+| PUT | `/cards/:cardId/likes` | Like a photo/card |
+| DELETE | `/cards/:cardId/likes` | Remove like from photo/card |
 
 ### Development Routes
 
-| Method | Endpoint      | Description                    |
-|--------|---------------|--------------------------------|
+| Method | Endpoint      | Description                      |
+| ------ | ------------- | -------------------------------- |
 | GET    | `/crash-test` | Test server crash recovery (PM2) |
 
 ## Authentication
@@ -140,23 +148,23 @@ Authorization: Bearer <jwt_token>
 
 The token is returned upon successful login/registration and contains the user's ID.
 
-
 ## Error Handling
 
 The API uses centralized error handling with consistent response formats:
 
-| Status Code | Description                    | Response                                        |
-|-------------|--------------------------------|-------------------------------------------------|
-| 400         | Validation error               | `{ "message": "Invalid data" }`                |
-| 401         | Authentication required        | `{ "message": "Unauthorized" }`                |
-| 403         | Insufficient permissions       | `{ "message": "Forbidden" }`                   |
-| 404         | Resource not found             | `{ "message": "Resource not found" }`          |
-| 409         | Conflict (duplicate email)     | `{ "message": "Email already exists" }`        |
-| 500         | Server error                   | `{ "message": "An error has occurred on the server" }` |
+| Status Code | Description                | Response                                               |
+| ----------- | -------------------------- | ------------------------------------------------------ |
+| 400         | Validation error           | `{ "message": "Invalid data" }`                        |
+| 401         | Authentication required    | `{ "message": "Unauthorized" }`                        |
+| 403         | Insufficient permissions   | `{ "message": "Forbidden" }`                           |
+| 404         | Resource not found         | `{ "message": "Resource not found" }`                  |
+| 409         | Conflict (duplicate email) | `{ "message": "Email already exists" }`                |
+| 500         | Server error               | `{ "message": "An error has occurred on the server" }` |
 
 ## Logging
 
 The application logs all requests and errors:
+
 - **Request logs**: Stored in `request.log`
 - **Error logs**: Stored in `error.log`
 
@@ -165,6 +173,7 @@ Both use JSON format for structured logging.
 ## Development
 
 **Code Linting:**
+
 ```bash
 npm run lint
 ```
@@ -175,6 +184,7 @@ Use tools like [Postman](https://www.postman.com/) or [Thunder Client](https://w
 ## Production Deployment
 
 The API is designed for production deployment with:
+
 - Environment variable configuration
 - PM2 process management
 - Error logging and monitoring
@@ -183,6 +193,7 @@ The API is designed for production deployment with:
 ## Database Models
 
 **User Model:**
+
 - Email (unique, required)
 - Password (hashed, required)
 - Name (optional, default: "Jacques Cousteau")
@@ -190,6 +201,7 @@ The API is designed for production deployment with:
 - Avatar (optional, default URL provided)
 
 **Card Model:**
+
 - Name (required)
 - Link (required, validated URL)
 - Owner (required, references User)

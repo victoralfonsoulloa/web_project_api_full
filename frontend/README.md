@@ -5,29 +5,34 @@ The frontend application for Around the US, a responsive social travel photo sha
 ## Features
 
 🎨 **Modern React Interface**
+
 - Responsive design that works on desktop and mobile
 - Modern React hooks and functional components
 - Smooth animations with Framer Motion
 - Clean, intuitive user experience
 
 👤 **User Authentication**
+
 - Secure registration and login forms
 - JWT token management with localStorage
 - Protected routes and authentication persistence
 - User profile management
 
 🖼️ **Photo Sharing**
+
 - Upload travel photos with titles and descriptions
 - Image validation and URL support
 - Responsive image gallery layout
 - Delete own photos
 
 ❤️ **Social Interactions**
+
 - Like and unlike photos from other users
 - Real-time like count updates
 - Visual feedback for user interactions
 
 📱 **Responsive Design**
+
 - Mobile-first approach
 - Adaptive layouts for all screen sizes
 - Touch-friendly interface elements
@@ -74,25 +79,29 @@ frontend/
 ## Setup & Installation
 
 1. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 2. **Environment Configuration:**
-   
+
    The app uses environment variables to configure the API endpoint:
-   
+
    **Development (.env.development):**
+
    ```env
    VITE_API_BASE_URL=http://localhost:3000
    ```
-   
+
    **Production (.env.production):**
+
    ```env
    VITE_API_BASE_URL=https://around-the-us.mooo.com/api
    ```
 
 3. **Start development server:**
+
    ```bash
    npm run dev
    ```
@@ -149,6 +158,7 @@ The frontend communicates with the backend API through:
 - **api.js**: Protected resource endpoints (users, cards, likes)
 
 All API calls include:
+
 - Automatic token inclusion for protected routes
 - Error handling with user feedback
 - Loading states for better UX
@@ -180,6 +190,7 @@ The application is fully responsive with:
 ## Production Build
 
 The production build:
+
 - Minifies and optimizes all assets
 - Includes source maps for debugging
 - Uses environment variables for API configuration
@@ -188,24 +199,28 @@ The production build:
 ## Key Features in Detail
 
 ### Authentication System
+
 - Secure JWT token management
 - Persistent login sessions
 - Route protection for authenticated users
 - Automatic token validation on app load
 
 ### Photo Management
+
 - Upload photos with title and image URL
 - Delete own photos with confirmation
 - Real-time updates when photos are modified
 - Image validation and error handling
 
 ### Social Features
+
 - Like/unlike photos from other users
 - Real-time like count updates
 - Visual feedback for interactions
 - User profile management
 
 ### User Experience
+
 - Smooth animations and transitions
 - Loading states for better feedback
 - Error handling with user-friendly messages
